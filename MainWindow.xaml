@@ -1,0 +1,95 @@
+﻿<Window x:Class="Graph.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graph"
+        mc:Ignorable="d"
+        Title="НАПИСАТЬ НАЗВАНИЕ" Height="550" Width="900" MinHeight="550" MinWidth="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Canvas Name="mainCanvas" Background="white" MouseLeftButtonDown="MainCanvas_MouseLeftButtonDown">
+        </Canvas>
+        
+        <StackPanel Name="mainStackPanel" Grid.Column="1" Background="DarkSeaGreen" Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button  Name="removeVertex" Height="50" Margin="5" FontSize="15" Click="RemoveVertex_Click">Удалить вершину</Button>
+                <Button Grid.Column="1" Name="clearCanvas" Height="50" Margin="5" FontSize="15" Click="ClearCanvas_Click">Очистить всё</Button>
+            </Grid>
+            <Line X1="0" X2="{Binding ElementName=mainStackPanel,Path=ActualWidth}" Y1="0" Y2="0" StrokeThickness="2" Stroke="White"/>
+            
+            <!-- Добавление вершин-->
+            <TextBlock Text="Расстояние между вершинами" FontSize="20" Margin="5,10" Foreground="White"/>
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Name="fromCB">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Title}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="и" Grid.Column="1" Foreground="White" FontSize="20" TextAlignment="Center"/>
+                <ComboBox Name="toCB" Grid.Column="2">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Title}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="=" Grid.Column="3" Foreground="White" FontSize="20" TextAlignment="Center"/>
+                <TextBox Name="distanceTB" Grid.Column="4"/>
+            </Grid>
+            <Button Name="saveDistance" Height="50" Margin="5" FontSize="15" Click="SaveDistance_Click">Добавить ребро</Button>
+
+            <Line X1="0" X2="{Binding ElementName=mainStackPanel,Path=ActualWidth}" Y1="0" Y2="0" StrokeThickness="2" Stroke="White"/>
+            <!--Поиск кратчайшего пути-->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Начальный пункт:" FontSize="20" Margin="5,10" Foreground="White"/>
+                <ComboBox Name="startVertex" Margin="10, 5" Width="50">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Title}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Конечный пункт:" FontSize="20" Margin="5,10" Foreground="White"/>
+                <ComboBox Name="endVertex" Margin="10, 5" Width="50">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Title}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Button Name="findShortestDistance" Height="50" Margin="5" FontSize="15" Click="FindShortestDistance_Click">Найти кратчайший путь</Button>
+            <Button Name="about" Height="50" Margin="5" FontSize="15" Click="About_Click">О программе</Button>
+        </StackPanel>
+    </Grid>
+</Window>
